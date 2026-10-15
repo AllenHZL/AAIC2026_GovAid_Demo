@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+*.log
+tmp/
+*.tar
+*.tar.gz
+*.zip
+*.pdf
+!docs/場域需求與驗證資料.pdf

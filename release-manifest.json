@@ -1,0 +1,88 @@
+{
+  "release_state": "published-images-xiaota-verified-launcher-uncommitted",
+  "base_commit": "9319accce8cf31e7686e884c468ab508be1b1227",
+  "includes_uncommitted_changes": true,
+  "files_sha256": {
+    ".env.example": "c79e8328c34e1d9ca6f0edda847c1f525ef611375cc909eca1794adaef10e424",
+    ".gitattributes": "3131783d82f971e1a661deab7c0888410a6cdf225968b5a0989816e70a1878c6",
+    ".gitignore": "e83fb308d169622511c58e26a283613ce26cbc581c747affb2e9c17e0c366f41",
+    "compose.yaml": "fdaffbb5aa8e12241d0d07e54072b4d6133b0df459fb7d8b1731a1e434857497",
+    "docs/competition.md": "210b860bdf1b1d092388c61dbb7fa7494a00fd19441bbfe78dca5c41f34d44c3",
+    "docs/demo.md": "39d141018c0dfb3a4ed3d961952d12402d9482b223ff16975cc925875b65454d",
+    "docs/limitations.md": "baa247ba50b68dc21953ce9b30bcdd9d9a047e141dbe26e72d4d7a9fc60f540e",
+    "docs/mcp.md": "7e87747efb4cb8b4ea01e8a2beb8ce51c32fd7f6a9cbe595438ca03cb968ca0d",
+    "docs/release-status.md": "48c49ddaeb9f78e287031bb3f3e63eb9428eb71868c5627b776a1c5a4bcf232b",
+    "docs/場域需求與驗證資料.pdf": "adb17cafca6ca2d7fa8320412fe435d90574f9a456e5328608085a66a1a4816d",
+    "LICENSE": "4cc3f72c100e59bbe11184bd9a69a86564093f762bb4554f7c81b8a7f1204880",
+    "README.md": "3a86cbec295657675927d712d14157dbc26db00dc5849cba1037e5393fd73cf3"
+  },
+  "images": {
+    "govaid-api": {
+      "digest": "sha256:412e735c229a8932b43689b2d8be67d9395b59593a976c33953c13e740a540df",
+      "config_digest": "sha256:e2c8f4ec83b51b2e91f869b11345eae0ac2e5696fbcbe5fee755f073afc158d6",
+      "created": "2026-10-15T14:29:24.430922725Z",
+      "layer_count": 17,
+      "env_names": [
+        "PATH",
+        "LANG",
+        "GPG_KEY",
+        "PYTHON_VERSION",
+        "PYTHON_SHA256",
+        "PYTHONUNBUFFERED",
+        "PYTHONDONTWRITEBYTECODE"
+      ],
+      "copy_steps": [
+        "COPY /uv /usr/local/bin/uv # buildkit",
+        "COPY pyproject.toml uv.lock ./ # buildkit",
+        "COPY contracts ./contracts # buildkit",
+        "COPY packages ./packages # buildkit",
+        "COPY policies ./policies # buildkit",
+        "COPY knowledge ./knowledge # buildkit",
+        "COPY apps/api ./apps/api # buildkit",
+        "COPY apps/worker ./apps/worker # buildkit",
+        "COPY apps/__init__.py ./apps/__init__.py # buildkit",
+        "COPY delivery/LICENSE /licenses/GovAid-MIT.txt # buildkit"
+      ]
+    },
+    "govaid-web": {
+      "digest": "sha256:1cf4e0d838a220156ddab3c7bb8d0d4872e1a143f00d95235b73b6a45f1ec97a",
+      "config_digest": "sha256:8c132d3927431236796af1267329a7b276f0d59228adb34ff054a7c9a40a1b15",
+      "created": "2026-10-15T14:56:56.778822196Z",
+      "layer_count": 9,
+      "env_names": [
+        "PATH",
+        "NODE_VERSION",
+        "YARN_VERSION",
+        "NEXT_TELEMETRY_DISABLED",
+        "API_BASE_URL"
+      ],
+      "copy_steps": [
+        "COPY docker-entrypoint.sh /usr/local/bin/ # buildkit",
+        "COPY apps/web/package*.json ./ # buildkit",
+        "COPY apps/web/ ./ # buildkit"
+      ]
+    },
+    "govaid-mcp": {
+      "digest": "sha256:41df6cf147c0501e875c270195f2efc22580b3917c9c43a3c0d0ec3082369647",
+      "config_digest": "sha256:86b13bc56275d5878d66e720bbdbcc001dbb2d8c5b881deb69920e7e9f9c8077",
+      "created": "2026-10-15T14:29:43.530888265Z",
+      "layer_count": 11,
+      "env_names": [
+        "PATH",
+        "LANG",
+        "GPG_KEY",
+        "PYTHON_VERSION",
+        "PYTHON_SHA256",
+        "PYTHONUNBUFFERED",
+        "PYTHONDONTWRITEBYTECODE"
+      ],
+      "copy_steps": [
+        "COPY /uv /usr/local/bin/uv # buildkit",
+        "COPY pyproject.toml uv.lock ./ # buildkit",
+        "COPY apps/mcp/server.py ./server.py # buildkit",
+        "COPY delivery/LICENSE /licenses/GovAid-MIT.txt # buildkit"
+      ]
+    }
+  },
+  "image_tag": "preliminary-9319accce8cf"
+}

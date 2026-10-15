@@ -1,0 +1,98 @@
+name: govaid-aaic2026-demo
+services:
+  db:
+    image: postgres@sha256:2d2b8998d31037bf721cfdf764d76ba74171b4fab3431b7f72c27c56ddbdf9e3
+    environment:
+      POSTGRES_USER: govaid
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-govaid-local-only}
+      POSTGRES_DB: govaid
+    volumes:
+      - govaid-db:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U govaid -d govaid"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  migrate:
+    image: ${GOVAID_API_IMAGE:-ghcr.io/allenhzl/govaid-api@sha256:412e735c229a8932b43689b2d8be67d9395b59593a976c33953c13e740a540df}
+    environment: &database
+      DATABASE_URL: postgresql+psycopg://govaid:${POSTGRES_PASSWORD:-govaid-local-only}@db:5432/govaid
+      MODEL_MODE: mock
+    command: [python, -m, packages.platform.db]
+    depends_on:
+      db:
+        condition: service_healthy
+  seed:
+    image: ${GOVAID_API_IMAGE:-ghcr.io/allenhzl/govaid-api@sha256:412e735c229a8932b43689b2d8be67d9395b59593a976c33953c13e740a540df}
+    environment: *database
+    command: [python, -m, packages.policy.seed, --include-candidates]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+  api:
+    image: ${GOVAID_API_IMAGE:-ghcr.io/allenhzl/govaid-api@sha256:412e735c229a8932b43689b2d8be67d9395b59593a976c33953c13e740a540df}
+    environment: &backend
+      DATABASE_URL: postgresql+psycopg://govaid:${POSTGRES_PASSWORD:-govaid-local-only}@db:5432/govaid
+      POLICY_STORAGE: sql
+      MODEL_MODE: ${MODEL_MODE:-live}
+      MODEL_NAME: ${MODEL_NAME:-gemini-3.5-flash-lite}
+      MODEL_API_KEY: ${MODEL_API_KEY:-}
+      MCP_ENABLED: true
+      LOCAL_TAOYUAN_LIVE_PREVIEW: true
+      COOKIE_SECURE: false
+      WORKER_MAX_ATTEMPTS: 1
+      WORKER_LEASE_SECONDS: 180
+      MAX_MODEL_CALLS: 2
+      COMPLIANCE_REVIEW_ENABLED: false
+      MODEL_TIMEOUT_SECONDS: 35
+      MAX_MODEL_OUTPUT_TOKENS: 2048
+      ALLOWED_ORIGINS: http://127.0.0.1:${WEB_PORT:-13028},http://localhost:${WEB_PORT:-13028}
+    ports:
+      - "127.0.0.1:${API_PORT:-18028}:8000"
+    healthcheck:
+      test: [CMD, python, -c, "import json,urllib.request; assert json.load(urllib.request.urlopen('http://127.0.0.1:8000/health',timeout=2))['status']=='ok'"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    depends_on:
+      seed:
+        condition: service_completed_successfully
+  worker:
+    image: ${GOVAID_API_IMAGE:-ghcr.io/allenhzl/govaid-api@sha256:412e735c229a8932b43689b2d8be67d9395b59593a976c33953c13e740a540df}
+    environment: *backend
+    command: [python, -m, apps.worker.main]
+    depends_on:
+      seed:
+        condition: service_completed_successfully
+  web:
+    image: ${GOVAID_WEB_IMAGE:-ghcr.io/allenhzl/govaid-web@sha256:1cf4e0d838a220156ddab3c7bb8d0d4872e1a143f00d95235b73b6a45f1ec97a}
+    environment:
+      API_BASE_URL: http://api:8000
+    ports:
+      - "127.0.0.1:${WEB_PORT:-13028}:3000"
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:3000/api/health',{signal:AbortSignal.timeout(2000)}).then(async r=>{if(!r.ok||(await r.json()).status!=='ok')process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    depends_on:
+      api:
+        condition: service_healthy
+  mcp:
+    image: ${GOVAID_MCP_IMAGE:-ghcr.io/allenhzl/govaid-mcp@sha256:41df6cf147c0501e875c270195f2efc22580b3917c9c43a3c0d0ec3082369647}
+    profiles: [mcp]
+    network_mode: service:api
+    environment:
+      GOVAID_MCP_API_BASE_URL: http://127.0.0.1:8000/v1
+      GOVAID_MCP_WEB_BASE_URL: http://127.0.0.1:${WEB_PORT:-13028}
+    stdin_open: true
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    depends_on:
+      api:
+        condition: service_healthy
+volumes:
+  govaid-db:
