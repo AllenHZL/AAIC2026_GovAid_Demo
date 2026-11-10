@@ -1,56 +1,32 @@
 {
-  "release_state": "published",
-  "version": "finals-20261111-7df804d9",
-  "base_commit": "ee3b3212e00ef5da4ea8f30f2a3675bbccd618b6",
-  "includes_uncommitted_changes": true,
-  "source_sha256": "7df804d9e38292deba8e86dae7df901a2f7868eaeb893fad5b43a2ec17a0062c",
-  "source_note": "Snapshot of reviewed working tree; developer will commit separately. Source hash covers explicit image build inputs, not runtime secrets.",
+  "version": "finals-20261111-6a15e20",
+  "published_on": "2026-11-11",
   "platform": "linux/amd64",
+  "source_commit": "6a15e20fd61893c5c940c750ac03e42ba82cd50b",
+  "source_sha256": "6886fd52339966090ef2d7a5461f4936e6c1bc238e35b92f6761214a23724861",
   "images": {
     "api": {
-      "tag": "ghcr.io/allenhzl/govaid-api:finals-20261111-7df804d9",
-      "digest": "sha256:f57ef438167948286ca29a24f94ff1cf80ff757f5b29077fcbafbba1d89dcb9b",
-      "registry_verified": true,
-      "anonymous_pull_verified": true
+      "tag": "ghcr.io/allenhzl/govaid-api:finals-20261111-6a15e20",
+      "digest": "sha256:be1ae0ee2b821cd2961f48a43cfaa2fe69c812481c644e3ec3d10e03bc38972a"
     },
     "web": {
-      "tag": "ghcr.io/allenhzl/govaid-web:finals-20261111-7df804d9",
-      "digest": "sha256:a67c0cfb7e905d5a7df757245b1bd008d05fa838864609a011b2112707a0cbbb",
-      "registry_verified": true,
-      "anonymous_pull_verified": true
+      "tag": "ghcr.io/allenhzl/govaid-web:finals-20261111-6a15e20",
+      "digest": "sha256:531a80db8e474587ed22c0ebb698051d8e3430de030ea6c82ecaa04b352c58b5"
     },
     "mcp": {
-      "tag": "ghcr.io/allenhzl/govaid-mcp:finals-20261111-7df804d9",
-      "digest": "sha256:0f067ccfdc9b6bc17a9d1c9b797b9a0c31acadb1ec90abf4d2aa9aa01f0af25a",
-      "registry_verified": true,
-      "anonymous_pull_verified": true
+      "tag": "ghcr.io/allenhzl/govaid-mcp:finals-20261111-6a15e20",
+      "digest": "sha256:46e7a89166e40544f8ac7ed0b289c9510be48aca548db0455f2dfe0dff892fc3"
     }
   },
-  "published_on": "2026-11-11",
-  "checks": {
-    "development_live_scenarios": [
-      "Taipei rent A/B",
-      "Taipei childcare A/B",
-      "blank Taoyuan rent"
-    ],
-    "development_live_model_calls": 3,
-    "development_pdf_and_app_mcp": "passed, including stale revision and revocation",
-    "image_browser_targeted_tests": 2,
-    "image_startup_and_form_pdf_smoke": "passed, mock only, zero model calls",
-    "image_mcp_self_check": "passed, mock only",
-    "cloud_scenarios_on_images": "not repeated",
-    "material_files_unchanged_from_previously_authorized_release": 94,
-    "remote_ci_for_uncommitted_fixes": "pending developer push"
-  },
   "files_sha256": {
-    ".env.example": "732c17a0e65ee9cd3a370a7e440ae0acd57bdddaf8f91faafbe8b19295b44ecc",
+    ".env.example": "f4e31c1c97baf705e8fe1cb4bba15afc9f715a6f3dac811526ef037c9ce13bc0",
     ".gitattributes": "3131783d82f971e1a661deab7c0888410a6cdf225968b5a0989816e70a1878c6",
     ".gitignore": "e83fb308d169622511c58e26a283613ce26cbc581c747affb2e9c17e0c366f41",
-    "compose.yaml": "7dbe466e090ff972a9744b0c4477ff7aa4bc2281721085ac9917735a9ff6fda7",
-    "docs/architecture.md": "cea786c5d9a568d032820780fb5442364999a9c37e14bbfd539b888a12f7d82a",
+    "compose.yaml": "d55909a701839aa9caeb852275d8b77c9d842913264d7c52939a0e37e8555f22",
+    "docs/architecture.md": "f47679e1d1c5971b6dbf457abb55af06b0d3bc3c48404e832480761e060269b5",
     "docs/場域需求與驗證資料.pdf": "adb17cafca6ca2d7fa8320412fe435d90574f9a456e5328608085a66a1a4816d",
     "LICENSE": "4cc3f72c100e59bbe11184bd9a69a86564093f762bb4554f7c81b8a7f1204880",
-    "NOTICE.md": "2ac1f03442584213df9ef8e1aaa90afa9360c27d38d0305b664ffb2dbfbecc89",
-    "README.md": "df05483add2c8741800586abedf795c053626085faa9c29287074f15bf3ce4fa"
+    "NOTICE.md": "9ba4177029acd39a8d8ff1d30c62ae215be079d0d210ded21a7ea3fb74520564",
+    "README.md": "c4312ced6f115ba1dba79423db5895658db0a7415b35f3636ad398ad86d9d38f"
   }
 }
