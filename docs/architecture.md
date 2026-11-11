@@ -38,6 +38,8 @@ flowchart TB
 
 ## 容器
 
-三個應用映像：API（同時供 Worker／遷移／匯入使用）、Web、MCP；另用 PostgreSQL。MCP 與 API 共用容器網路，只取得本機 API／Web 位址，不接收模型 key、Docker socket 或主機檔案掛載。只有 Web／API 綁定主機的 127.0.0.1。
+三個應用映像：API（同時供 Worker／遷移／匯入使用）、Web、MCP；另用 PostgreSQL。MCP 與 API 共用容器網路，只取得本機 API／Web 位址，不接收模型 key、Docker socket 或主機檔案掛載。預設 Web／API 只綁定主機的 127.0.0.1。選用手機模式時，Web 額外綁定指定 Wi-Fi IP，API 主機埠維持本機限制，但 Web 代理仍提供 API 操作。
+
+區網入口使用 HTTP，只供可信任 Wi-Fi 的合成資料體驗。IP 不作驗證；連線者可建立自己的匿名案件，聊天可能消耗模型配額。測後移除區網綁定並停用防火牆規則，操作見 [手機教學](mobile.md)。正式對外服務還需 HTTPS、身分驗證與用量限制。
 
 目前是本機展示系統，支援四方案的一般案件。匿名工作階段不是完整登入系統；沒有官方送件串接，也不保證特殊資格或跨方案併領。mock 提供不連接雲端模型的操作方式；使用自然語言問答時，請啟用 Gemini。

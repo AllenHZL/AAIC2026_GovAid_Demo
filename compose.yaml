@@ -14,7 +14,7 @@ services:
       timeout: 3s
       retries: 20
   migrate:
-    image: ghcr.io/allenhzl/govaid-api@sha256:9d1629c539794d80b836ce6032d580e29884dbf94207531e538f4ce7d831fcd1
+    image: ghcr.io/allenhzl/govaid-api@sha256:299d422a0549df8b1472bb1e3d63aef5a3db55cd20d0b323b18bde7fdd84b7ec
     environment: &database
       DATABASE_URL: postgresql+psycopg://govaid:${POSTGRES_PASSWORD:-govaid-local-only}@db:5432/govaid
       MODEL_MODE: mock
@@ -23,14 +23,14 @@ services:
       db:
         condition: service_healthy
   seed:
-    image: ghcr.io/allenhzl/govaid-api@sha256:9d1629c539794d80b836ce6032d580e29884dbf94207531e538f4ce7d831fcd1
+    image: ghcr.io/allenhzl/govaid-api@sha256:299d422a0549df8b1472bb1e3d63aef5a3db55cd20d0b323b18bde7fdd84b7ec
     environment: *database
     command: [python, -m, packages.policy.seed, --include-candidates]
     depends_on:
       migrate:
         condition: service_completed_successfully
   api:
-    image: ghcr.io/allenhzl/govaid-api@sha256:9d1629c539794d80b836ce6032d580e29884dbf94207531e538f4ce7d831fcd1
+    image: ghcr.io/allenhzl/govaid-api@sha256:299d422a0549df8b1472bb1e3d63aef5a3db55cd20d0b323b18bde7fdd84b7ec
     environment: &backend
       DATABASE_URL: postgresql+psycopg://govaid:${POSTGRES_PASSWORD:-govaid-local-only}@db:5432/govaid
       POLICY_STORAGE: sql
@@ -60,14 +60,14 @@ services:
       seed:
         condition: service_completed_successfully
   worker:
-    image: ghcr.io/allenhzl/govaid-api@sha256:9d1629c539794d80b836ce6032d580e29884dbf94207531e538f4ce7d831fcd1
+    image: ghcr.io/allenhzl/govaid-api@sha256:299d422a0549df8b1472bb1e3d63aef5a3db55cd20d0b323b18bde7fdd84b7ec
     environment: *backend
     command: [python, -m, apps.worker.main]
     depends_on:
       seed:
         condition: service_completed_successfully
   web:
-    image: ghcr.io/allenhzl/govaid-web@sha256:76ff7b859e114880caf1fadc30ea632d21d660bad3079e5bfaf1bd7a24c6b079
+    image: ghcr.io/allenhzl/govaid-web@sha256:18505af5536cf5f9b6f1edfae532f0983534ec8ac7a82d68eaf7b26fdf2fb651
     environment:
       API_BASE_URL: http://api:8000
     ports:
@@ -82,7 +82,7 @@ services:
       api:
         condition: service_healthy
   mcp:
-    image: ghcr.io/allenhzl/govaid-mcp@sha256:111bd3ee3d6bb74248dc3a8dee5d474ad5a23d4adf698a8b27991693f0feddc4
+    image: ghcr.io/allenhzl/govaid-mcp@sha256:21bbae59b8515f4e3e303fd01e9762c1dc064bbe34adaa30b4d8fe311312c7f2
     profiles: [mcp]
     network_mode: service:api
     environment:

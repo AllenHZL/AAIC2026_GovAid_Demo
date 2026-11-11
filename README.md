@@ -4,7 +4,7 @@
 
 你可以直接填表，或先用對話描述情況。Gemini 整理條件、解釋政策；確認資料後，GovAid 用固定版本的規則試算。最後可下載 PDF，也可讓支援 MCP 的外部助手一起核對案件與文件。
 
-**目前版本：`finals-20261111-e2459da`** · 支援 Windows、macOS 或 Linux 上的 Docker；映像平台為 `linux/amd64`，ARM 裝置尚未驗證。
+**目前版本：`finals-20261112-ec67779`** · 支援 Windows、macOS 或 Linux 上的 Docker；映像平台為 `linux/amd64`，ARM 裝置尚未驗證。
 
 ## 開始使用
 
@@ -37,6 +37,8 @@ if ($LASTEXITCODE -ne 0) { throw '啟動失敗，請查看 docker compose logs -
 `docker compose ps -a` 中，`migrate` 和 `seed` 顯示 `Exited (0)` 代表初始化完成。API、Web、DB 應為健康狀態，Worker 應持續運行。
 
 ## 四個工作區
+
+要用手機體驗，請依 [同 Wi-Fi 連線](docs/mobile.md) 開啟選用的區網入口。預設仍只接受本機連線。分享期間只用合成資料；IP 不是密碼，HTTP 不加密，能連線的人可能消耗聊天配額。教學另附關閉分享的方法。
 
 | 工作區 | 用法 |
 | --- | --- |
@@ -90,16 +92,16 @@ docker compose run --rm --no-deps -T mcp --self-check
 - 名稱：`govaid-readonly`
 - 啟動指令：`docker`
 - 工作目錄：此 repo 的完整路徑
-- 引數：逐項填入下列內容，將三個路徑換成自己的位置
+- 引數：逐項填入下列內容，以下 `C:\projects\AAIC2026_GovAid_Demo` 是示意，請將三個路徑換成自己的位置
 
 ```text
 compose
 --project-directory
-C:\coding_project\AAIC2026_GovAid_Demo
+C:\projects\AAIC2026_GovAid_Demo
 --env-file
-C:\coding_project\AAIC2026_GovAid_Demo\.env
+C:\projects\AAIC2026_GovAid_Demo\.env
 -f
-C:\coding_project\AAIC2026_GovAid_Demo\compose.yaml
+C:\projects\AAIC2026_GovAid_Demo\compose.yaml
 run
 --rm
 --no-deps
@@ -156,8 +158,8 @@ docker compose up -d --wait db api worker web
 ## 架構與資料來源
 
 - [系統架構](docs/architecture.md)
-- [場域需求與驗證資料](docs/場域需求與驗證資料.pdf)：三位匿名受訪者的質性回饋，已同意公開供競賽使用。
+- [場域需求與驗證資料](docs/場域需求與驗證資料.pdf)（已獲准公開）。三位匿名受訪者的質性回饋，已同意公開供競賽使用。
 - [來源與授權](NOTICE.md)
-- [版本與映像清單](release-manifest.json)
+- 版本與映像清單：`release-manifest.json`。
 
 此 repo 提供 Docker 啟動設定與使用文件，應用程式位於 API、Web、MCP 三個映像內；不是完整原始碼庫。

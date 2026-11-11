@@ -1,21 +1,21 @@
 {
-  "version": "finals-20261111-e2459da",
-  "published_on": "2026-11-11",
+  "version": "finals-20261112-ec67779",
+  "published_on": "2026-11-12",
   "platform": "linux/amd64",
-  "source_commit": "e2459da193cdcfda9342580cd2134e7ca2907707",
-  "source_sha256": "083f5b39ed22d02d4c54fe48824fb45948d6605bb9df7f366e0cc027e5efae12",
+  "source_commit": "ec6777985a271f09ad4954b6f9740d011d5cc14c",
+  "source_sha256": "6c116482fa5eddd27c4c053208f58eb369d9e3f667cc3ddd2ab39e3d90145703",
   "images": {
     "api": {
-      "tag": "ghcr.io/allenhzl/govaid-api:finals-20261111-e2459da",
-      "digest": "sha256:9d1629c539794d80b836ce6032d580e29884dbf94207531e538f4ce7d831fcd1"
+      "tag": "ghcr.io/allenhzl/govaid-api:finals-20261112-ec67779",
+      "digest": "sha256:299d422a0549df8b1472bb1e3d63aef5a3db55cd20d0b323b18bde7fdd84b7ec"
     },
     "web": {
-      "tag": "ghcr.io/allenhzl/govaid-web:finals-20261111-e2459da",
-      "digest": "sha256:76ff7b859e114880caf1fadc30ea632d21d660bad3079e5bfaf1bd7a24c6b079"
+      "tag": "ghcr.io/allenhzl/govaid-web:finals-20261112-ec67779",
+      "digest": "sha256:18505af5536cf5f9b6f1edfae532f0983534ec8ac7a82d68eaf7b26fdf2fb651"
     },
     "mcp": {
-      "tag": "ghcr.io/allenhzl/govaid-mcp:finals-20261111-e2459da",
-      "digest": "sha256:111bd3ee3d6bb74248dc3a8dee5d474ad5a23d4adf698a8b27991693f0feddc4"
+      "tag": "ghcr.io/allenhzl/govaid-mcp:finals-20261112-ec67779",
+      "digest": "sha256:21bbae59b8515f4e3e303fd01e9762c1dc064bbe34adaa30b4d8fe311312c7f2"
     }
   },
   "files_sha256": {
@@ -24,9 +24,11 @@
     ".gitignore": "e83fb308d169622511c58e26a283613ce26cbc581c747affb2e9c17e0c366f41",
     "LICENSE": "4cc3f72c100e59bbe11184bd9a69a86564093f762bb4554f7c81b8a7f1204880",
     "NOTICE.md": "9ba4177029acd39a8d8ff1d30c62ae215be079d0d210ded21a7ea3fb74520564",
-    "README.md": "2138dbb6ab5e31f7c40e3baf83db034c0fed5f615e1bf714d705713ed4f6f505",
-    "compose.yaml": "98fb3a66a8335651b0718963cbb108b80f2e72fa0bd22bd7fcaa0879110475e5",
-    "docs/architecture.md": "4afb45b19151f27ebce3bf5f8868598b15d16f441d2a69ca8519461e90ee8e03",
+    "README.md": "6669fa6c8dfd26b1a94bb0746dee2fa401f1687307076d6366dfc24c96689b37",
+    "compose.lan.yaml": "7c3cfa7731eaf4d507008b1835e81c2303e7448dbd389a47d310b479d41be659",
+    "compose.yaml": "62951e7cd144534abfdeb7d0fe1665b783f52dbe720788ae818843be65bb6a5f",
+    "docs/architecture.md": "5efd7db4cd3ebf1743786bb994c1af139e435590b07c52fd04b2064823c11f34",
+    "docs/mobile.md": "db18afd97f68bfbce7719fba2b91f6f5854d3f96e22b8c9a6e5b4110bc9d540c",
     "docs/場域需求與驗證資料.pdf": "adb17cafca6ca2d7fa8320412fe435d90574f9a456e5328608085a66a1a4816d"
   }
 }
