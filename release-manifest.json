@@ -21,14 +21,16 @@
   "files_sha256": {
     ".env.example": "4fd81894149982eed52766f962d393301fd7665dffc5284955f350f293f6b764",
     ".gitattributes": "3131783d82f971e1a661deab7c0888410a6cdf225968b5a0989816e70a1878c6",
-    ".gitignore": "e83fb308d169622511c58e26a283613ce26cbc581c747affb2e9c17e0c366f41",
+    ".gitignore": "13fbbead489cdb28f053bfd7da8a415b02da61145505070c1aab7e32d20413d1",
     "LICENSE": "4cc3f72c100e59bbe11184bd9a69a86564093f762bb4554f7c81b8a7f1204880",
     "NOTICE.md": "9ba4177029acd39a8d8ff1d30c62ae215be079d0d210ded21a7ea3fb74520564",
-    "README.md": "95fe6dc257811d6f85dc300ef51b172012aa69d2772044be946301785bf2d546",
+    "README.md": "b4e061420ab841dc4323d3b5f0fe0e32e491464ecdea67d40e3d9832070b3b82",
     "compose.lan.yaml": "7c3cfa7731eaf4d507008b1835e81c2303e7448dbd389a47d310b479d41be659",
     "compose.yaml": "6c2525399d5c1c6336d6975d056d552481df5db9eecf616f96befa40787bd727",
-    "docs/architecture.md": "61952fcc5c8dc93dbaa321a244777c2fda862b24e85086241131539a61a7c933",
+    "docs/architecture.md": "c6574dcaad1282be7b79b6f6aee50a9bad56f358bbaf6e81b6c93f88a537ea8f",
     "docs/mobile.md": "db18afd97f68bfbce7719fba2b91f6f5854d3f96e22b8c9a6e5b4110bc9d540c",
-    "docs/場域需求與驗證資料.pdf": "adb17cafca6ca2d7fa8320412fe435d90574f9a456e5328608085a66a1a4816d"
-  }
+    "docs/場域需求與驗證資料.pdf": "bb3f306f241e57fd21dc6ee1f6a039a4df564dcac86379ad57ea9f1776848d5f",
+    "docs/場域指定命題組_GovAid_Copilot_你愛我對不隊_提案.pdf": "2e8f68d5d1514a3eb086fcc8ba2b52cc7c3ba364fd27bf702c83d65f089d6367"
+  },
+  "documentation_updated_on": "2026-11-15"
 }
